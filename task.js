@@ -13,7 +13,7 @@ addBtn.addEventListener('click', addCandy)
 //Functions
 async function getCandyList() {
     try {
-        const response = await axios.get("https://crudcrud.com/api/5a9aeec525ae4681bf9a7073e1500cb3/candyList")
+        const response = await axios.get("https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList")
 
         for(let i = 0; i < response.data.length; i++) {
             showCandies(response.data[i])
@@ -114,7 +114,7 @@ function showCandies(candyObj) {
 
 async function saveToCrudCrud(candyObj) {
         try {
-            const response = await axios.post("https://crudcrud.com/api/5a9aeec525ae4681bf9a7073e1500cb3/candyList", candyObj)
+            const response = await axios.post("https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList", candyObj)
 
             showCandies(response.data)
         } catch (error) {
@@ -123,16 +123,30 @@ async function saveToCrudCrud(candyObj) {
 }
 
 async function updateQuantity(event, candyObj) {
+    const btn = event.target
     const id = candyObj._id
     const quantity = candyObj.quantity
-    const updatedQuantity = quantity - 1
-    const updatedCandyObj = {...candyObj, quantity : updatedQuantity}
+    let updatedCandyObj
+    
+
+    if(btn.classList.contains("buy1-btn")) {
+        const updatedQuantity = quantity - 1
+        updatedCandyObj = {...candyObj, quantity : updatedQuantity}
+    }
+    else if(btn.classList.contains("buy2-btn")) {
+        const updatedQuantity = quantity - 2
+        updatedCandyObj = {...candyObj, quantity : updatedQuantity}
+    }
+    else {
+        const updatedQuantity = quantity - 3
+        updatedCandyObj = {...candyObj, quantity : updatedQuantity}
+    }
 
     //Delete _id property from updatedQuantityObj
     delete updatedCandyObj._id
 
     try {
-        await axios.put(`https://crudcrud.com/api/5a9aeec525ae4681bf9a7073e1500cb3/candyList/${id}`, updatedCandyObj)
+        await axios.put(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`, updatedCandyObj)
 
         location.reload()
     } catch (error) {
