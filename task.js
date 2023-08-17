@@ -131,14 +131,29 @@ async function updateQuantity(event, candyObj) {
 
     if(btn.classList.contains("buy1-btn")) {
         const updatedQuantity = quantity - 1
+        if(updatedQuantity == 0) {
+            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            window.alert(`${candyObj.candy} is out of stock now`)
+            location.reload()
+        }
         updatedCandyObj = {...candyObj, quantity : updatedQuantity}
     }
     else if(btn.classList.contains("buy2-btn")) {
         const updatedQuantity = quantity - 2
+        if(updatedQuantity == 0) {
+            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            window.alert(`${candyObj.candy} is out of stock now`)
+            location.reload()
+        }
         updatedCandyObj = {...candyObj, quantity : updatedQuantity}
     }
     else {
         const updatedQuantity = quantity - 3
+        if(updatedQuantity == 0) {
+            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            window.alert(`${candyObj.candy} is out of stock now`)
+            location.reload()
+        }
         updatedCandyObj = {...candyObj, quantity : updatedQuantity}
     }
 
