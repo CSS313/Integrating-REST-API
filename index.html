@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrage REST API Project</title>
+    <style>
+        .product-list-item {
+            margin: 1rem;
+        }
+        li {
+            display: inline;
+            margin: 1rem;
+        }
+        button {
+            margin: 1rem;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <form action="#">
+        <label for="candyname">Candy Name:</label>
+        <input type="text" id="candyname" name="candyname" value=""><br><br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value=""><br><br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" value="0"><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="0"><br><br>
+        <input type="submit" id="submit-btn" value="Add Item">
+    </form>
+    <h1><strong>Available Candies</strong></h1>
+    <ul id="candy-list">
+        <!-- <div class = "candy-list-item">
+            <li class="candyli">Eclair</li>
+            <li class="descli">Chocolaty</li>
+            <li class="priceli">2</li>
+            <li class="quantli">100</li>
+            <button class="buy1-btn">Buy 1</button>
+            <button class="buy2-btn">Buy 2</button>
+            <button class="buy3-btn">Buy 3</button>
+        </div>     -->
+    </ul>
+    <script src="task.js"></script>
+</body>
+</html>
