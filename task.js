@@ -93,13 +93,13 @@ function showCandies(candyObj) {
 
     //Add event listener to buy1, buy2 and buy3 buttons
     buy1Button.addEventListener('click', (event) => {
-        updateQuantity(event, candyObj._id)
+        updateQuantity(event, candyObj)
     })
     buy2Button.addEventListener('click', (event) => {
-        updateQuantity(event, candyObj._id)
+        updateQuantity(event, candyObj)
     })
     buy3Button.addEventListener('click', (event) => {
-        updateQuantity(event, candyObj._id)
+        updateQuantity(event, candyObj)
     })
 
     //Append the candyListDiv to ul with id = candy-list i.e. candyList
@@ -122,10 +122,20 @@ async function saveToCrudCrud(candyObj) {
         }
 }
 
-async function updateQuantity(event, id) {
+async function updateQuantity(event, candyObj) {
+    const id = candyObj._id
+    const quantity = candyObj.quantity
+    const updatedQuantity = quantity - 1
+    const updatedCandyObj = {...candyObj, quantity : updatedQuantity}
+
+    //Delete _id property from updatedQuantityObj
+    delete updatedCandyObj._id
+
     try {
-        
+        await axios.put(`https://crudcrud.com/api/5a9aeec525ae4681bf9a7073e1500cb3/candyList/${id}`, updatedCandyObj)
+
+        location.reload()
     } catch (error) {
-        
+        console.log(error)
     }
 }
