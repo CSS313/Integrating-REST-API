@@ -13,7 +13,7 @@ addBtn.addEventListener('click', addCandy)
 //Functions
 async function getCandyList() {
     try {
-        const response = await axios.get("https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList")
+        const response = await axios.get("https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList")
 
         for(let i = 0; i < response.data.length; i++) {
             showCandies(response.data[i])
@@ -114,7 +114,7 @@ function showCandies(candyObj) {
 
 async function saveToCrudCrud(candyObj) {
         try {
-            const response = await axios.post("https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList", candyObj)
+            const response = await axios.post("https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList", candyObj)
 
             showCandies(response.data)
         } catch (error) {
@@ -131,8 +131,12 @@ async function updateQuantity(event, candyObj) {
 
     if(btn.classList.contains("buy1-btn")) {
         const updatedQuantity = quantity - 1
+        if(updatedQuantity < 0) {
+            window.alert("You cannot buy candies more than you have in stock")
+            return
+        }
         if(updatedQuantity == 0) {
-            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            await axios.delete(`https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList/${id}`)
             window.alert(`${candyObj.candy} is out of stock now`)
             location.reload()
         }
@@ -140,8 +144,12 @@ async function updateQuantity(event, candyObj) {
     }
     else if(btn.classList.contains("buy2-btn")) {
         const updatedQuantity = quantity - 2
+        if(updatedQuantity < 0) {
+            window.alert("You cannot buy candies more than you have in stock")
+            return
+        }
         if(updatedQuantity == 0) {
-            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            await axios.delete(`https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList/${id}`)
             window.alert(`${candyObj.candy} is out of stock now`)
             location.reload()
         }
@@ -149,19 +157,23 @@ async function updateQuantity(event, candyObj) {
     }
     else {
         const updatedQuantity = quantity - 3
+        if(updatedQuantity < 0) {
+            window.alert("You cannot buy candies more than you have in stock")
+            return
+        }
         if(updatedQuantity == 0) {
-            await axios.delete(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`)
+            await axios.delete(`https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList/${id}`)
             window.alert(`${candyObj.candy} is out of stock now`)
             location.reload()
         }
         updatedCandyObj = {...candyObj, quantity : updatedQuantity}
     }
-
+  
     //Delete _id property from updatedQuantityObj
     delete updatedCandyObj._id
-
+   
     try {
-        await axios.put(`https://crudcrud.com/api/e380b8d2c117459b907faeb2b35a10ec/candyList/${id}`, updatedCandyObj)
+        await axios.put(`https://crudcrud.com/api/1b991218bfe7472e92e8683a4c3d95b4/candyList/${id}`, updatedCandyObj)
 
         location.reload()
     } catch (error) {
